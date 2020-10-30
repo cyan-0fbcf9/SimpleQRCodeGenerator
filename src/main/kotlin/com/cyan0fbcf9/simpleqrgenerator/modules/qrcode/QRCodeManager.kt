@@ -5,7 +5,9 @@ import com.google.zxing.WriterException
 import com.google.zxing.client.j2se.MatrixToImageWriter
 import com.google.zxing.qrcode.QRCodeWriter
 import java.io.ByteArrayOutputStream
+import java.io.IOException
 import java.io.OutputStream
+import java.lang.Exception
 import javax.imageio.ImageIO
 
 class QRCodeManager(private val size: Int = 512) {
@@ -17,7 +19,7 @@ class QRCodeManager(private val size: Int = 512) {
             ByteArrayOutputStream().apply {
                 ImageIO.write(bufferedImage, "png", this)
             }.toByteArray()
-        } catch (e: WriterException) {
+        } catch (e: Exception) {
             null
         }
     }
