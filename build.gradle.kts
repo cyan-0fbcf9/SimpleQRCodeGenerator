@@ -26,9 +26,11 @@ dependencies {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
 
-    val zxing_version = "3.4.1"
-    implementation("com.google.zxing:core:${zxing_version}")
-    implementation("com.google.zxing:javase:${zxing_version}")
+    val zxingVersion = "3.4.1"
+    implementation("com.google.zxing:core:${zxingVersion}")
+    implementation("com.google.zxing:javase:${zxingVersion}")
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
 }
 
 tasks.withType<Test> {
