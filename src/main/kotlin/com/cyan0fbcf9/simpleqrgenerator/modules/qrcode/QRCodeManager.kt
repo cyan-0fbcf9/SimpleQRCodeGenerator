@@ -6,10 +6,10 @@ import com.cyan0fbcf9.simpleqrgenerator.operator.images.duplicateResizedImage
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.WriterException
-import com.google.zxing.client.j2se.MatrixToImageConfig
 import com.google.zxing.client.j2se.MatrixToImageWriter
 import com.google.zxing.qrcode.QRCodeWriter
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
+import org.springframework.stereotype.Service
 import java.awt.Image
 import java.awt.image.BufferedImage
 import java.io.ByteArrayOutputStream
@@ -17,6 +17,7 @@ import java.lang.Exception
 import javax.imageio.ImageIO
 import kotlin.math.floor
 
+@Service
 class QRCodeManager(private val size: Int = 512) {
 
     fun generate(url: String, image: Image? = null): ByteArray? {
