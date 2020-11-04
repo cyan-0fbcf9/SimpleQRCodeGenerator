@@ -1,8 +1,6 @@
 package com.cyan0fbcf9.simpleqrgenerator.services
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import org.springframework.stereotype.Service
 import kotlin.coroutines.CoroutineContext
 
