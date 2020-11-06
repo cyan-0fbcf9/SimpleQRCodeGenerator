@@ -1,20 +1,17 @@
 package com.cyan0fbcf9.simpleqrgenerator.endpoints
 
 import com.cyan0fbcf9.simpleqrgenerator.http.images.requestImage
-import com.cyan0fbcf9.simpleqrgenerator.modules.qrcode.QRCodeManager
+import com.cyan0fbcf9.simpleqrgenerator.services.QRCodeService
 import com.cyan0fbcf9.simpleqrgenerator.services.AppCoroutineService
-import com.google.zxing.NotFoundException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
-import org.springframework.web.HttpRequestMethodNotSupportedException
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/qr")
-class QR(private val coroutineService: AppCoroutineService, private val qrManager: QRCodeManager) {
+class QR(private val coroutineService: AppCoroutineService, private val qrCodeService: QRCodeService) {
     @GetMapping("/generate", produces = [MediaType.IMAGE_PNG_VALUE])
     @ResponseBody
     fun generate(@RequestParam("url", required = false) url: String?,
@@ -23,6 +20,6 @@ class QR(private val coroutineService: AppCoroutineService, private val qrManage
             requestImage(imageLink ?: "https://ja.nuxtjs.org/logos/nuxt-icon.png")
         }
 
-        qrManager.generate(url ?: "https://cyan-0fbcf9.com", image = image) ?: ByteArray(0)
+        qrCodeService.generate(url ?: "https://cyan-0fbcf9.com", image = image) ?: ByteArray(0)
     }
 }
