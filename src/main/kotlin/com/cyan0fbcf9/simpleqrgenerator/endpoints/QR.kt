@@ -3,10 +3,13 @@ package com.cyan0fbcf9.simpleqrgenerator.endpoints
 import com.cyan0fbcf9.simpleqrgenerator.http.images.requestImage
 import com.cyan0fbcf9.simpleqrgenerator.modules.qrcode.QRCodeManager
 import com.cyan0fbcf9.simpleqrgenerator.services.AppCoroutineService
+import com.google.zxing.NotFoundException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
+import org.springframework.web.HttpRequestMethodNotSupportedException
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -22,4 +25,9 @@ class QR(private val coroutineService: AppCoroutineService, private val qrManage
 
         qrManager.generate(url ?: "https://cyan-0fbcf9.com", image = image) ?: ByteArray(0)
     }
+
+    @ExceptionHandler(NotFoundException::class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    fun handleNotFoundException(): String = "Not Found"
 }
