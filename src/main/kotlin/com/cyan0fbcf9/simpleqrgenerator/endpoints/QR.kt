@@ -25,9 +25,4 @@ class QR(private val coroutineService: AppCoroutineService, private val qrManage
 
         qrManager.generate(url ?: "https://cyan-0fbcf9.com", image = image) ?: ByteArray(0)
     }
-
-    @ExceptionHandler(NotFoundException::class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ResponseBody
-    fun handleNotFoundException(): String = "Not Found"
 }
