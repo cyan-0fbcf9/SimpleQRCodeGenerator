@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.*
 class QR(private val coroutineService: AppCoroutineService, private val qrCodeService: QRCodeService) {
     @GetMapping("/generate", produces = [MediaType.IMAGE_PNG_VALUE])
     @ResponseBody
-    fun generate(@RequestParam("url", required = false) url: String?,
-                 @RequestParam("image_link", required = false) imageLink: String?): ByteArray = runBlocking {
+    fun generate(@RequestParam("value", required = false) url: String?,
+                 @RequestParam("image", required = false) imageLink: String?): ByteArray = runBlocking {
         val image = withContext(coroutineService.coroutineContext + Dispatchers.IO) {
-            requestImage(imageLink ?: "https://ja.nuxtjs.org/logos/nuxt-icon.png")
+            if (imageLink != null)
+                requestImage(imageLink)
+            else
+                null
         }
 
         qrCodeService.generate(url ?: "https://cyan-0fbcf9.com", image = image) ?: ByteArray(0)
