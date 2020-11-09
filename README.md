@@ -1,5 +1,5 @@
 # SimpleQRCodeGenerator
-The QR Code Generate API that is simple.
+The QR Code Generating API that is simple.
 
 ## Endpoints
 ### /qr/generate
