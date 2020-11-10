@@ -34,4 +34,5 @@ Have displaying an image to center on QR code.
 ```
 
 **Generated QR Code**  
+*Sample*  
 <img src="./src/main/resources/static/samples/generate.png" alt="sample" width=256 />
