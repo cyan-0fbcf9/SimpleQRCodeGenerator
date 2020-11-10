@@ -28,15 +28,15 @@ class QRCodeService(private val size: Int = 512) {
                     size,
                     mapOf<EncodeHintType, Any>(
                         EncodeHintType.MARGIN to 0,
-                            EncodeHintType.ERROR_CORRECTION to ErrorCorrectionLevel.H,
-                            EncodeHintType.QR_VERSION to 5
+                            EncodeHintType.ERROR_CORRECTION to ErrorCorrectionLevel.Q,
+                            EncodeHintType.QR_VERSION to 6
                     ))
         } catch (e: WriterException) {
             println("[app error] ${e.message}")
             return null
         }
         val qrBufferedImage = MatrixToImageWriter.toBufferedImage(qrBitmap).duplicateChangedType(BufferedImage.TYPE_3BYTE_BGR).apply {
-            val resizedImage = (image as? BufferedImage)?.duplicateResizedImage(floor(size * 0.25).toInt(), floor(size * 0.25).toInt())
+            val resizedImage = (image as? BufferedImage)?.duplicateResizedImage(floor(size * 0.24).toInt(), floor(size * 0.24).toInt())
             if (resizedImage != null)
                 combine(resizedImage)
         }
