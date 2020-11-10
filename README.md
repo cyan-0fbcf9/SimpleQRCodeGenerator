@@ -32,3 +32,6 @@ Have displaying an image to center on QR code.
 ```text
 /qr/generate?value=https%3A%2F%2Fcyan-0fbcf9.com&image=<image-url>
 ```
+
+**Generated QR Code**  
+<img src="./src/main/resources/static/samples/generate.png" alt="sample" width=256 />
