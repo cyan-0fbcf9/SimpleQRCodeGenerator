@@ -10,5 +10,5 @@ class ErrorHandlingController {
     @ExceptionHandler(NoHandlerFoundException::class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
-    fun notFoundException(): NoHandlerFoundData = NoHandlerFoundData(message = "Not handler found.")
+    fun notFoundException(): NoHandlerFoundData = NoHandlerFoundData(message = "No handler found.")
 }
