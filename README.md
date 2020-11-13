@@ -18,8 +18,11 @@ URL, message, etc ...
 The URL of image that is displayed to center in qr code.
     * type : String
     
-**ATTENTION**  
-*When using url parameters to queries, it should do percent-encoding.*
+*ATTENTION*  
+When using url parameters to queries, it should do percent-encoding.  
+
+#### Response
+`Content-Type` image/png
     
 ## Example
 Generating QR code of a URL.  
