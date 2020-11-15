@@ -25,5 +25,6 @@ class QR(private val qrCodeService: QRCodeService) {
     @ExceptionHandler(NoGeneratedQRCode::class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ResponseBody
-    fun handleNoGeneratedQRCode(exception: NoGeneratedQRCode): Map<String, Any?> = mapOf("message" to exception.message, "status" to HttpStatus.BAD_REQUEST)
+    fun handleNoGeneratedQRCode(exception: NoGeneratedQRCode): Map<String, Any?> =
+            mapOf("message" to exception.message, "status" to HttpStatus.BAD_REQUEST)
 }
