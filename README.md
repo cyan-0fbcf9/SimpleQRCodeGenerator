@@ -1,6 +1,9 @@
 # SimpleQRCodeGenerator
 The QR Code Generating API that is simple.
 
+## Deploying URL
+https://qr-generator-0fbcf9.herokuapp.com
+
 ## Endpoints
 ### /qr/generate
 
