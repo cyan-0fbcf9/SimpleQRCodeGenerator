@@ -43,3 +43,22 @@ tasks.withType<KotlinCompile> {
         jvmTarget = "1.8"
     }
 }
+
+tasks.register("npmInstall", Exec::class) {
+    commandLine = listOf("powershell", "-Command", "npm", "--prefix", "${rootDir}/web", "install", "${rootDir}/web")
+}
+tasks.register("npmLint", Exec::class) {
+    commandLine = listOf("powershell", "-Command", "npm", "--prefix", "${rootDir}/web", "run", "lint")
+}
+
+tasks.register("npmBuild", Exec::class) {
+    if (!file("${rootDir}/web/node_modules").exists()) {
+        dependsOn("npmInstall")
+    }
+    dependsOn("npmLint")
+    commandLine = listOf("powershell", "-Command", "npm", "--prefix", "${rootDir}/web", "run", "build")
+}
+
+tasks.processResources {
+    dependsOn("npmBuild")
+}
