@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.apache.tools.ant.taskdefs.condition.Os
 
 plugins {
     id("org.springframework.boot") version "2.3.5.RELEASE"
@@ -45,10 +46,32 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.register("npmInstall", Exec::class) {
-    commandLine = listOf("powershell", "-Command", "npm", "--prefix", "${rootDir}/web", "install", "${rootDir}/web")
+    val npmCommand = "npm --prefix ${rootDir}/web install ${rootDir}/web"
+    when {
+        Os.isFamily(Os.FAMILY_WINDOWS) -> {
+            commandLine = listOf("powershell", "-Command", npmCommand)
+        }
+        Os.isFamily(Os.FAMILY_MAC) -> {
+            commandLine = listOf("zsh", "-c", npmCommand)
+        }
+        Os.isFamily(Os.FAMILY_UNIX) -> {
+            commandLine = listOf("bash", "-c", npmCommand)
+        }
+    }
 }
 tasks.register("npmLint", Exec::class) {
-    commandLine = listOf("powershell", "-Command", "npm", "--prefix", "${rootDir}/web", "run", "lint")
+    val npmCommand = "npm --prefix ${rootDir}/web run lint"
+    when {
+        Os.isFamily(Os.FAMILY_WINDOWS) -> {
+            commandLine = listOf("powershell", "-Command", npmCommand)
+        }
+        Os.isFamily(Os.FAMILY_MAC) -> {
+            commandLine = listOf("zsh", "-c", npmCommand)
+        }
+        Os.isFamily(Os.FAMILY_UNIX) -> {
+            commandLine = listOf("bash", "-c", npmCommand)
+        }
+    }
 }
 
 tasks.register("npmBuild", Exec::class) {
@@ -56,7 +79,19 @@ tasks.register("npmBuild", Exec::class) {
         dependsOn("npmInstall")
     }
     dependsOn("npmLint")
-    commandLine = listOf("powershell", "-Command", "npm", "--prefix", "${rootDir}/web", "run", "build")
+
+    val npmCommand = "npm --prefix ${rootDir}/web run build"
+    when {
+        Os.isFamily(Os.FAMILY_WINDOWS) -> {
+            commandLine = listOf("powershell", "-Command", npmCommand)
+        }
+        Os.isFamily(Os.FAMILY_MAC) -> {
+            commandLine = listOf("zsh", "-c", npmCommand)
+        }
+        Os.isFamily(Os.FAMILY_UNIX) -> {
+            commandLine = listOf("bash", "-c", npmCommand)
+        }
+    }
 }
 
 tasks.processResources {
