@@ -38,3 +38,6 @@ out/
 
 ### vue build ###
 src/main/resources/static/
+
+### mac
+.DS_Store
